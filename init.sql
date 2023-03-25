@@ -5,7 +5,7 @@ CREATE TABLE
         email VARCHAR(255),
         gender VARCHAR(15),
         birthday DATE DEFAULT NULL,
-        status BOOLEAN DEFAULT TRUE
+        status VARCHAR(11) DEFAULT "user"
     );
 
 CREATE TABLE
@@ -102,7 +102,7 @@ CREATE TABLE
         FOREIGN KEY (command) REFERENCES command(id) ON UPDATE CASCADE,
         grade REAL,
         jury INTEGER,
-        FOREIGN KEY (jury) REFERENCES participant(id) ON UPDATE CASCADE
+        FOREIGN KEY (jury) REFERENCES jury(id) ON UPDATE CASCADE
     );
 
 CREATE TABLE
@@ -112,7 +112,7 @@ CREATE TABLE
         FOREIGN KEY (command) REFERENCES command(id) ON UPDATE CASCADE,
         grade REAL,
         mentor INTEGER,
-        FOREIGN KEY (mentor) REFERENCES participant(id) ON UPDATE CASCADE
+        FOREIGN KEY (mentor) REFERENCES mentor(id) ON UPDATE CASCADE
     );
 
 CREATE TABLE
@@ -121,3 +121,25 @@ CREATE TABLE
         sympathy INTEGER,
         FOREIGN KEY (sympathy) REFERENCES command(id) ON UPDATE CASCADE
     );
+
+
+    CREATE TABLE
+    check_point(
+        id SERIAL PRIMARY KEY,
+        command INTEGER,
+        FOREIGN KEY (command) REFERENCES command(id) ON UPDATE CASCADE,
+        grade JSON,
+        jury INTEGER,
+        FOREIGN KEY (jury) REFERENCES jury(id) ON UPDATE CASCADE,
+        occasion INTEGER,
+        FOREIGN KEY (occasion) REFERENCES occasion(id) ON UPDATE CASCADE
+    );      
+
+    CREATE TABLE
+    news(
+        id SERIAL PRIMARY KEY,
+        name VARCHAR(255),
+        description VARCHAR(1024),
+        news_link VARCHAR(2047),
+        image VARCHAR(2047)
+    );     
